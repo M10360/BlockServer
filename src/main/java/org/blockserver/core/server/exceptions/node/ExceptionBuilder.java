@@ -14,29 +14,30 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.server.exceptions.node;
 
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+public class ExceptionBuilder {
+    private StringBuilder builder = new StringBuilder("\t");
 
-/**
- * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see WorldComponent
- */
-public class Vector {
-    @Getter float x;
-    @Getter float y;
-    @Getter float z;
-
-    public Vector(Vector vector) {
-        this(vector.getX(), vector.getY(), vector.getZ());
+    public ExceptionBuilder(String name, ExceptionNode... nodes) {
+        builder.append(name);
+        for (ExceptionNode node : nodes)
+            appendNode(node);
     }
 
-    public Vector(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public ExceptionBuilder appendNode(ExceptionNode node) {
+        if (node == null)
+            return this;
+        builder.append("\n\t");
+        builder.append(node.getName());
+        builder.append(": '");
+        builder.append(node.getValue());
+        builder.append('\'');
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return builder.toString();
     }
 }

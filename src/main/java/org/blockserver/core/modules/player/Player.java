@@ -18,9 +18,9 @@ package org.blockserver.core.modules.player;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.blockserver.core.Server;
 import org.blockserver.core.modules.message.Message;
 import org.blockserver.core.modules.world.positions.Location;
+import org.blockserver.core.server.Server;
 
 import java.net.InetSocketAddress;
 import java.util.UUID;

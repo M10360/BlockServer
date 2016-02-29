@@ -14,37 +14,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.modules.event.events.messages;
 
 import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+import lombok.Setter;
+import org.blockserver.core.modules.event.handler.CancellableImplementation;
+import org.blockserver.core.modules.message.Message;
 
 /**
  * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see org.blockserver.core.modules.world.positions.Vector
- * @see WorldComponent
  */
-public class Location extends Vector {
-    @Getter long yaw;
-    @Getter long pitch;
+public class MessageEvent<T extends Message> implements CancellableImplementation {
+    @Getter @Setter private T message;
 
-    public Location(Vector vector) {
-        super(vector);
-    }
-
-    public Location(Location location) {
-        this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-    }
-
-    public Location(float x, float y, float z) {
-        super(x, y, z);
-    }
-
-    public Location(float x, float y, float z, long yaw, long pitch) {
-        this(x, y, z);
-        this.yaw = yaw;
-        this.pitch = pitch;
+    public MessageEvent(T message) {
+        this.message = message;
     }
 }

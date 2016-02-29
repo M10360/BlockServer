@@ -16,18 +16,32 @@
  */
 package org.blockserver.core.modules.network.pipeline;
 
+
 import lombok.Getter;
 import org.blockserver.core.modules.network.pipeline.packet.RawPacket;
 
-public class PipelineProviderImplementation implements PipelineProvider {
-    @Getter private final PacketPipeline handler;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
-    public PipelineProviderImplementation(PacketPipeline handler) {
-        this.handler = handler;
+public class PacketPipeline {
+    @Getter private final Set<PipelineReceiver> dispatchers = Collections.synchronizedSet(new HashSet<>());
+
+    public PacketPipeline() {
+
     }
 
-    @Override
     public void provide(RawPacket packet) {
-        handler.provide(packet);
+        for (PipelineReceiver dispatcher : dispatchers) {
+            dispatcher.receive(packet);
+        }
+    }
+
+    public void unregisterDispatcher(PipelineReceiver dispatcher) {
+        dispatchers.remove(dispatcher);
+    }
+
+    public void registerDispatcher(PipelineReceiver dispatcher) {
+        dispatchers.add(dispatcher);
     }
 }

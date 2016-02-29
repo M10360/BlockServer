@@ -14,25 +14,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core;
+package org.blockserver.core.modules.event.handler;
 
-import org.blockserver.core.modules.logging.LoggingComponent;
+import org.blockserver.core.modules.event.EventComponent;
+import org.blockserver.core.modules.event.events.messages.MessageEvent;
+import org.blockserver.core.modules.message.Message;
 import org.blockserver.core.server.Server;
-import org.blockserver.core.server.loaders.CoreComponentLoader;
-import org.blockserver.core.server.loaders.JarComponentLoader;
 
 /**
- * Main class for the core.
- *
- * @author BlockServer team
+ * Written by Exerosis!
  */
-public class run {
+public class MessageEventListener<T extends Message> extends EventListener<T, MessageEvent<T>> {
+    private EventComponent eventComponent;
 
-    public static void main(String[] args) {
-        Server server = new Server(new CoreComponentLoader(), new JarComponentLoader());
+    public MessageEventListener<T> register(Class<T> listenerType, EventComponent eventComponent) {
+        this.eventComponent = eventComponent;
+        return (MessageEventListener<T>) register(listenerType, eventComponent.getEventManager());
+    }
 
-        Runtime.getRuntime().addShutdownHook(new Thread(server::disable));
-        server.enable();
-        server.getComponent(LoggingComponent.class).info("BlockServer is now running.");
+    public void unregister(Server server) {
+        unregister(eventComponent.getEventManager());
     }
 }

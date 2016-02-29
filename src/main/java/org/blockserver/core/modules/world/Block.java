@@ -23,7 +23,7 @@ import org.blockserver.core.modules.world.positions.Vector;
  * Written by Exerosis!
  *
  * @author BlockServer Team
- * @see WorldModule
+ * @see WorldComponent
  */
 public class Block {
     @Getter private ChunkPosition chunk;

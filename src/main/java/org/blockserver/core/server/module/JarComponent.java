@@ -14,37 +14,27 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.server.module;
 
 import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+import org.blockserver.core.server.Server;
 
 /**
- * Written by Exerosis!
+ * Base class for all modules. New modules should implement this class.
  *
  * @author BlockServer Team
- * @see org.blockserver.core.modules.world.positions.Vector
- * @see WorldComponent
+ * @see org.blockserver.core.modules
+ * @see org.blockserver.core.server.module.EnableableImplementation
  */
-public class Location extends Vector {
-    @Getter long yaw;
-    @Getter long pitch;
+public class JarComponent implements Component {
+    @Getter private final Server server;
 
-    public Location(Vector vector) {
-        super(vector);
+    public JarComponent(Server server) {
+        this.server = server;
     }
 
-    public Location(Location location) {
-        this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-    }
-
-    public Location(float x, float y, float z) {
-        super(x, y, z);
-    }
-
-    public Location(float x, float y, float z, long yaw, long pitch) {
-        this(x, y, z);
-        this.yaw = yaw;
-        this.pitch = pitch;
+    @Override
+    public String toString() {
+        return "[" + server.toString() + "] " + getClass().getSimpleName();
     }
 }

@@ -14,29 +14,22 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.server.exceptions.node;
 
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+public class ExceptionNode {
+    private String name = "";
+    private Object value;
 
-/**
- * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see WorldComponent
- */
-public class Vector {
-    @Getter float x;
-    @Getter float y;
-    @Getter float z;
-
-    public Vector(Vector vector) {
-        this(vector.getX(), vector.getY(), vector.getZ());
+    public ExceptionNode(String name, Object value) {
+        this.name = name;
+        this.value = value;
     }
 
-    public Vector(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public String getName() {
+        return name;
+    }
+
+    public Object getValue() {
+        return value;
     }
 }

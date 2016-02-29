@@ -18,7 +18,7 @@ package org.blockserver.core.modules.network.pipeline.packet;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.blockserver.core.event.CancellableImplementation;
+import org.blockserver.core.modules.event.handler.CancellableImplementation;
 
 import java.net.InetSocketAddress;
 

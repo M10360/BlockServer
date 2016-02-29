@@ -14,29 +14,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.modules.event.handler;
 
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+import java.util.Map;
+import java.util.WeakHashMap;
 
-/**
- * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see WorldComponent
- */
-public class Vector {
-    @Getter float x;
-    @Getter float y;
-    @Getter float z;
+public interface CancellableImplementation extends Cancellable {
+    Map<CancellableImplementation, Boolean> instances = new WeakHashMap<>();
 
-    public Vector(Vector vector) {
-        this(vector.getX(), vector.getY(), vector.getZ());
+    @Override
+    default boolean isCancelled() {
+        return instances.getOrDefault(this, false);
     }
 
-    public Vector(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    @Override
+    default void setCancelled(boolean cancelled) {
+        instances.put(this, cancelled);
     }
 }

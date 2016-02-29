@@ -28,7 +28,7 @@ import java.util.Map;
  * @author BlockServer Team
  */
 public class Entity {
-    private final Map<Class<? extends EntityModule>, EntityModule> modules = new HashMap<>();
+    private final Map<Class<? extends EntityComponent>, EntityComponent> modules = new HashMap<>();
     private float x;
     private float y;
     private float z;
@@ -38,7 +38,7 @@ public class Entity {
         this.x = x;
         this.y = y;
         this.z = z;
-        modules.values().forEach(EntityModule::enable);
+        modules.values().forEach(EntityComponent::enable);
     }
 
     public Entity(Location location) {
@@ -46,28 +46,28 @@ public class Entity {
     }
 
 
-    public void addModule(EntityModule module) {
+    public void addModule(EntityComponent module) {
         modules.put(module.getClass(), module);
     }
 
-    public void removeModule(Class<? extends EntityModule> moduleClass) {
+    public void removeModule(Class<? extends EntityComponent> moduleClass) {
         modules.remove(moduleClass);
     }
 
-    public void removeModule(EntityModule module) {
+    public void removeModule(EntityComponent module) {
         removeModule(module.getClass());
     }
 
-    public EntityModule getModule(Class<? extends EntityModule> moduleClass) {
+    public EntityComponent getModule(Class<? extends EntityComponent> moduleClass) {
         return modules.get(moduleClass);
     }
 
     public void destroy() {
-        modules.values().forEach(EntityModule::disable);
+        modules.values().forEach(EntityComponent::disable);
     }
 
 
-    public Map<Class<? extends EntityModule>, EntityModule> getModules() {
+    public Map<Class<? extends EntityComponent>, EntityComponent> getModules() {
         return Collections.unmodifiableMap(modules);
     }
 

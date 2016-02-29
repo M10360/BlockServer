@@ -14,37 +14,37 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.modules.logging;
 
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+import org.blockserver.core.server.module.Component;
+import org.blockserver.core.server.module.JarComponent;
 
 /**
- * Written by Exerosis!
+ * Logging JarComponent with different log levels. (debug, info, warn, error)
+ * TODO: Implement SLF4j and/or log4j2
  *
  * @author BlockServer Team
- * @see org.blockserver.core.modules.world.positions.Vector
- * @see WorldComponent
+ * @see JarComponent
  */
-public class Location extends Vector {
-    @Getter long yaw;
-    @Getter long pitch;
+public class LoggingComponent implements Component {
 
-    public Location(Vector vector) {
-        super(vector);
+    public LoggingComponent() {
+
     }
 
-    public Location(Location location) {
-        this(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+    public void debug(String message) {
+        System.out.println("[DEBUG]: " + message);
     }
 
-    public Location(float x, float y, float z) {
-        super(x, y, z);
+    public void info(String message) {
+        System.out.println("[INFO]: " + message);
     }
 
-    public Location(float x, float y, float z, long yaw, long pitch) {
-        this(x, y, z);
-        this.yaw = yaw;
-        this.pitch = pitch;
+    public void warn(String message) {
+        System.out.println("[WARN]: " + message);
+    }
+
+    public void error(String message) {
+        System.err.println("[ERROR]: " + message);
     }
 }

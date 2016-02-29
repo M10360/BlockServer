@@ -14,29 +14,10 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
-
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+package org.blockserver.core.server.module;
 
 /**
- * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see WorldComponent
+ * Created by Exerosis.
  */
-public class Vector {
-    @Getter float x;
-    @Getter float y;
-    @Getter float z;
-
-    public Vector(Vector vector) {
-        this(vector.getX(), vector.getY(), vector.getZ());
-    }
-
-    public Vector(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
+public interface Component extends EnableableImplementation {
 }

@@ -14,29 +14,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.modules.event.handler;
 
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+public enum Priority {
 
-/**
- * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see WorldComponent
- */
-public class Vector {
-    @Getter float x;
-    @Getter float y;
-    @Getter float z;
+    LOWEST(0), LOW(1), NORMAL(2), HIGH(3), HIGHEST(4), INTERNAL(5);
 
-    public Vector(Vector vector) {
-        this(vector.getX(), vector.getY(), vector.getZ());
+    private final int slot;
+
+    Priority(int slot) {
+        this.slot = slot;
     }
 
-    public Vector(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+    public int getSlot() {
+        return this.slot;
     }
 }

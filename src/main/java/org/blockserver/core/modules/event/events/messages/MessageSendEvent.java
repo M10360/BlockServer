@@ -14,29 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with BlockServer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.blockserver.core.modules.world.positions;
+package org.blockserver.core.modules.event.events.messages;
 
-import lombok.Getter;
-import org.blockserver.core.modules.world.WorldComponent;
+import org.blockserver.core.modules.message.Message;
 
-/**
- * Written by Exerosis!
- *
- * @author BlockServer Team
- * @see WorldComponent
- */
-public class Vector {
-    @Getter float x;
-    @Getter float y;
-    @Getter float z;
-
-    public Vector(Vector vector) {
-        this(vector.getX(), vector.getY(), vector.getZ());
-    }
-
-    public Vector(float x, float y, float z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+public class MessageSendEvent<T extends Message> extends MessageEvent<T> {
+    public MessageSendEvent(T message) {
+        super(message);
     }
 }
